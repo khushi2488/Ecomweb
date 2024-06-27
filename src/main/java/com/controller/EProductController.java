@@ -2,6 +2,7 @@ package com.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,12 @@ public class EProductController {
 	public String newProduct() {// method name
 		return "NewProduct";// jsp name
 	}
+	
+//	@GetMapping("/searchproductbyname") // url->browser
+//	public String searchProductByName() {// method name
+//		return "DeleteProductByName";// jsp name
+//	}
+	
 	@PostMapping("/saveproduct")
 	public String saveProduct(EProductBean productBean) {
 		// using bean read data ->productBean
@@ -26,7 +33,7 @@ public class EProductController {
 		// dao insert
 		productDao.addProduct(productBean);
 		productDao.addProduct(productBean);//argument 
-		return "Welcome";// X
+		return "redirect:/products";// X
 	}
 
 	@GetMapping("/products")
@@ -40,16 +47,21 @@ public class EProductController {
 	
 	
 	@GetMapping("/deleteproduct")
-	public String deleteProduct(@RequestParam("productId") Integer productId) {
-
-
-
-
-
-		System.out.println("deleteProduct() => "+productId );
+	public String deleteProducts(@RequestParam("productId") Integer productId) {
+		
+		productDao.deleteProduct(productId);
+		
+		System.out.println("deleteProduct() =>"+productId);
 		
 		return "redirect:/products";
 	}
+//	@PostMapping("/deleteproductbyname") // url->browser
+//	public String deleteProductByName(@RequestParam("productName") String productName) {// method name
+//		productDao.deleteProductbyName(productName);
+//		return "redirect:/products";// jsp name
+//	}
+
+
 	
 
 
