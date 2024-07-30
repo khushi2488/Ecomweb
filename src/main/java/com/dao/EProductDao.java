@@ -12,8 +12,9 @@ public class EProductDao {
 	@Autowired
 	JdbcTemplate stmt;// used to execute sql query into databse
 	public void addProduct(EProductBean productBean) {
-		stmt.update("insert into products (productName,category,price,qty) values (?,?,?,?) ",
-				productBean.getProductName(), productBean.getCategory(), productBean.getPrice(), productBean.getQty());
+		stmt.update("insert into products (productName,category,price,qty, productImagePath) values (?,?,?,?,?) ",
+				productBean.getProductName(), productBean.getCategory(), productBean.getPrice(), productBean.getQty(),productBean.getProductImagePath());
+		
 	}
 
 	public List<EProductBean> getAllProducts() {
@@ -24,6 +25,12 @@ public class EProductDao {
 	public void deleteProduct(int id) {
 		stmt.update("delete from products where  productId=?",id);
 		
+	}
+	public EProductBean getProductById(Integer productId) {
+
+		EProductBean bean = stmt.queryForObject("select * from products where productId = ? ",
+				new BeanPropertyRowMapper<>(EProductBean.class), new Object[] { productId }); // name color
+		return bean;
 	}
 	
 //	public void deleteProductbyName(String name) {

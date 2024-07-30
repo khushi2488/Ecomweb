@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Ecom Signup</title>
+<title>Payment</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -19,11 +19,11 @@ body {
 
 .container {
     background-color: #fff;
-    padding: 30px;
+    padding: 40px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px;
+    width: 350px;
 }
 
 h2 {
@@ -31,30 +31,25 @@ h2 {
     margin-bottom: 20px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
 label {
+    display: block;
     font-size: 16px;
     color: #333;
-    margin-bottom: 5px;
+    text-align: left;
+    margin-bottom: 8px;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="file"] {
-    width: 90%;
+input[type="text"] {
+    width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 input[type="submit"] {
-    padding: 10px 20px;
+    padding: 12px 20px;
     color: #fff;
     background-color: #007bff;
     border: none;
@@ -70,21 +65,18 @@ input[type="submit"]:hover {
 </head>
 <body>
 <div class="container">
-    <h2>Ecom Signup</h2>
-    <form action="esignup" method="post" enctype="multipart/form-data">
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" required />
+    <h2>Pay</h2>
+    <form action="payment" method="post">
+        <label for="creditCardNum">Credit Card:</label>
+        <input type="text" id="creditCardNum" name="creditCardNum" required />
 
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required />
+        <label for="expiredDate">Expired Date:</label>
+        <input type="text" id="expiredDate" name="expiredDate" placeholder="MM/YY" required />
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" required />
 
-        <label for="profilePic">Profile Picture:</label>
-        <input type="file" id="profilePic" name="profilePic" />
-
-        <input type="submit" value="Signup" />
+        <input type="submit" value="Pay" />
     </form>
 </div>
 </body>

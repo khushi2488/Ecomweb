@@ -8,11 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.service.FileUploadService;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 import com.bean.EProductBean;
 import com.dao.EProductDao;
 @Controller
 public class EProductController {
+	@Autowired
+	FileUploadService FileUploadService; 
+	
 	@Autowired
 	EProductDao productDao;
 	@GetMapping("/newproduct") // url->browser
@@ -20,19 +28,13 @@ public class EProductController {
 		return "NewProduct";// jsp name
 	}
 	
-//	@GetMapping("/searchproductbyname") // url->browser
-//	public String searchProductByName() {// method name
-//		return "DeleteProductByName";// jsp name
-//	}
-	
-	@PostMapping("/saveproduct")
-	public String saveProduct(EProductBean productBean) {
-		// using bean read data ->productBean
-		// validation using XX
 
-		// dao insert
+	@PostMapping("/saveproduct")
+	public String saveProduct(EProductBean productBean,@RequestParam("masterImage") MultipartFile masterImage) {
+		
+		FileUploadService.uploadProductImage(masterImage);
+		productBean.setProductImagePath("/images/products/" + masterImage.getOriginalFilename());
 		productDao.addProduct(productBean);
-		productDao.addProduct(productBean);//argument 
 		return "redirect:/products";// X
 	}
 
@@ -55,13 +57,18 @@ public class EProductController {
 		
 		return "redirect:/products";
 	}
-//	@PostMapping("/deleteproductbyname") // url->browser
-//	public String deleteProductByName(@RequestParam("productName") String productName) {// method name
-//		productDao.deleteProductbyName(productName);
-//		return "redirect:/products";// jsp name
-//	}
+	@GetMapping("/viewproduct")
+	public String viewProduct(@RequestParam("productId") Integer productId, Model model) {
 
+		// id->details->table : products
+		// select * from products where productId = ?
+		EProductBean productBean = productDao.getProductById(productId);
+		model.addAttribute("product", productBean);
 
+		return "ViewProduct";
+	}
+
+     
 	
 
 
