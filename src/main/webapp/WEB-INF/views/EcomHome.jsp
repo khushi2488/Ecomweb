@@ -4,45 +4,52 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>EcomHome</title>
+<title>ShopEase</title>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 <style>
 body {
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f8f9fa;
     margin: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
 }
 
 .container {
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    width: 100%;
-    max-width: 450px;
+    height: 100vh;
+    padding: 20px;
 }
 
 .title {
-    font-size: 28px;
+    font-size: 48px;
     font-weight: 700;
     color: #00796b;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-size: 24px;
+    color: #004d40;
     margin-bottom: 20px;
 }
 
 .welcome {
-    font-size: 22px;
+    font-size: 28px;
     color: #00796b;
     margin-bottom: 10px;
 }
 
 .description {
-    font-size: 16px;
+    font-size: 18px;
     color: #555555;
     margin-bottom: 20px;
+    max-width: 600px;
 }
 
 .profile-pic {
@@ -70,15 +77,36 @@ body {
     background-color: #004d40;
     transform: scale(1.05);
 }
+
+.footer {
+    font-size: 16px;
+    color: #555555;
+    margin-top: 20px;
+}
+
+.footer a {
+    color: #00796b;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer i {
+    margin-right: 5px;
+}
 </style>
 </head>
 <body>
 <div class="container">
-    <h2 class="title">EcomHome</h2>
-    <p class="welcome">Welcome, ${user.firstName}</p>
-    <p class="description">We are glad to have you here! Explore our wide range of products and enjoy a seamless shopping experience.</p>
+    <h2 class="title">ShopEase <i class="fas fa-shopping-bag"></i></h2>
+    <p class="subtitle"><i class="fas fa-store"></i> Your One-Stop Shop for Everything!</p>
+    <p class="welcome">Welcome, ${user.firstName} <i class="fas fa-smile"></i></p>
+    <p class="description"><i class="fas fa-info-circle"></i> We are thrilled to have you here! Discover our vast collection of products tailored just for you. Enjoy a seamless shopping experience with amazing offers and fast delivery.</p>
     <img class="profile-pic" alt="Profile Picture" src="${user.profilePicPath}" />
-    <a class="btn products-link" href="userproducts">Explore Products</a>
+    <a class="btn products-link" href="userproducts"><i class="fas fa-box-open"></i> Explore Products</a>
+    
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
